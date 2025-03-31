@@ -5,7 +5,9 @@
 //
 
 import SafariServices
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 final class LCPDialogViewController: UIViewController {
     @IBOutlet var scrollView: UIScrollView!

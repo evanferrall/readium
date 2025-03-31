@@ -6,7 +6,9 @@
 
 import Foundation
 import ReadiumShared
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 /// Layout axis.
 public enum Axis: String, Codable, Hashable {

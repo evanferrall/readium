@@ -6,7 +6,9 @@
 
 import Foundation
 import ReadiumShared
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 /// A navigator supporting user selection.
 public protocol SelectableNavigator: Navigator {

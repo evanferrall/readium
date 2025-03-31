@@ -7,7 +7,9 @@
 import Foundation
 import ReadiumInternal
 import ReadiumShared
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 import WebKit
 
 /// A view rendering a spread of resources with a reflowable layout.

@@ -7,7 +7,9 @@
 import Foundation
 import ReadiumShared
 import SafariServices
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 /// UX delegate for the loan renew LSD interaction.
 public protocol LCPRenewDelegate {

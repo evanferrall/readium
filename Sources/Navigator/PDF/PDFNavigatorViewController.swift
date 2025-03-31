@@ -7,7 +7,9 @@
 import Foundation
 import PDFKit
 import ReadiumShared
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 public protocol PDFNavigatorDelegate: VisualNavigatorDelegate, SelectableNavigatorDelegate {
     /// Called after the `PDFDocumentView` is created.

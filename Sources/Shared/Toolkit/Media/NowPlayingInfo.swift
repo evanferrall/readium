@@ -6,7 +6,9 @@
 
 import Foundation
 import MediaPlayer
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 @available(*, unavailable, message: "Use `NowPlayingInfo` instead")
 public typealias _NowPlayingInfo = NowPlayingInfo

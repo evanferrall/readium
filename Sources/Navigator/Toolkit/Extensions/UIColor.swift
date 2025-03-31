@@ -4,7 +4,9 @@
 //  available in the top-level LICENSE file of the project.
 //
 
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 public extension UIColor {
     /// Converts the color to a CSS expression.

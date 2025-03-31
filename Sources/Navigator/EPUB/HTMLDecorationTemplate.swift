@@ -6,7 +6,9 @@
 
 import Foundation
 import SwiftSoup
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 /// An `HTMLDecorationTemplate` renders a `Decoration` into a set of HTML elements and associated stylesheet.
 public struct HTMLDecorationTemplate {

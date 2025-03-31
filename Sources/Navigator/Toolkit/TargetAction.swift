@@ -5,7 +5,9 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 /// Represents a couple (`target`, `action`) which can be invoked from a `sender`.
 final class TargetAction {

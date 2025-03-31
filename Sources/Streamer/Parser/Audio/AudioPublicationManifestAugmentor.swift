@@ -7,7 +7,9 @@
 import AVFoundation
 import Foundation
 import ReadiumShared
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 /// Implements a strategy to augment a `Manifest` of an audio publication with additional metadata and
 /// cover, for example by looking into the audio files metadata.

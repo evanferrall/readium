@@ -6,7 +6,9 @@
 
 import Foundation
 import ReadiumShared
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 /// A navigator able to render arbitrary decorations over a publication.
 public protocol DecorableNavigator {

@@ -5,7 +5,11 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
+#endif
 
 public enum URLAuthenticationChallengeResponse {
     /// Use the specified credential.
@@ -108,9 +112,19 @@ public final class DefaultHTTPClient: HTTPClient, Loggable {
         let appInfo = Bundle.main.infoDictionary
         let appName = appInfo?["CFBundleName"] as? String ?? "Unknown App"
         let appVersion = appInfo?["CFBundleShortVersionString"] as? String ?? "0"
-        let device = UIDevice.current
 
-        return "\(appName)/\(appVersion) \(deviceName) \(device.systemName)/\(device.systemVersion) CFNetwork/\(cfNetworkVersion) Darwin/\(darwinVersion)"
+        #if os(iOS) || os(tvOS)
+        let device = UIDevice.current
+        let platformInfo = "\(deviceName) \(device.systemName)/\(device.systemVersion)"
+        #elseif os(macOS)
+        let osVersion = ProcessInfo.processInfo.operatingSystemVersion
+        let osVersionString = "\(osVersion.majorVersion).\(osVersion.minorVersion).\(osVersion.patchVersion)"
+        let platformInfo = "\(deviceName) macOS/\(osVersionString)"
+        #else
+        let platformInfo = "\(deviceName) UnknownPlatform/0.0"
+        #endif
+
+        return "\(appName)/\(appVersion) \(platformInfo) CFNetwork/\(cfNetworkVersion) Darwin/\(darwinVersion)"
     }()
 
     /// Creates a `DefaultHTTPClient` with common configuration settings.

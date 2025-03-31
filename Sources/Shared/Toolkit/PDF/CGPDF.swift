@@ -5,7 +5,9 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 /// Extends Core Graphics's `CGPDFDocument` to conform to `PDFDocument`.
 ///

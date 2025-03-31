@@ -8,7 +8,9 @@ import ReadiumInternal
 import ReadiumShared
 import SafariServices
 import SwiftSoup
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 import WebKit
 
 public protocol EPUBNavigatorDelegate: VisualNavigatorDelegate, SelectableNavigatorDelegate {

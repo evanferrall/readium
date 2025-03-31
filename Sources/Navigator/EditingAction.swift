@@ -6,7 +6,9 @@
 
 import Foundation
 import ReadiumShared
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 /// An `EditingAction` is an item in the text selection menu.
 ///

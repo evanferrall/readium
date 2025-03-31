@@ -5,7 +5,9 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 extension UIView {
     /// Returns the safe area insets taking only into account the device screen notches (eg. on

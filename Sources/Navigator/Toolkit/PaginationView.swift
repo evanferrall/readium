@@ -5,7 +5,9 @@
 //
 
 import ReadiumShared
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 enum PageLocation: Equatable {
     case start

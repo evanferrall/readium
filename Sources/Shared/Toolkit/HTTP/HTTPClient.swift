@@ -5,7 +5,9 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 /// An HTTP client performs HTTP requests.
 ///

@@ -6,7 +6,9 @@
 
 import Foundation
 #if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 #elseif os(macOS)
 import AppKit
 #endif

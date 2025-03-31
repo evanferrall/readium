@@ -6,7 +6,9 @@
 
 import Foundation
 import ReadiumShared
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 /// Zoomable image view controller.
 final class ImageViewController: UIViewController, Loggable {

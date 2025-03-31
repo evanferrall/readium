@@ -6,7 +6,9 @@
 
 import AVFoundation
 import Foundation
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 @available(*, unavailable, message: "Use `AudioSession` instead")
 public typealias _AudioSession = AudioSession

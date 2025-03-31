@@ -6,7 +6,9 @@
 
 import ReadiumInternal
 import ReadiumShared
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 public protocol CBZNavigatorDelegate: VisualNavigatorDelegate {}
 

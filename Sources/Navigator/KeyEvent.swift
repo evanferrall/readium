@@ -5,7 +5,9 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 /// Represents a keyboard event emitted by a Navigator.
 public struct KeyEvent: Equatable, CustomStringConvertible {

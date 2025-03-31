@@ -5,7 +5,9 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 public enum PDFDocumentError: Error {
     /// The provided password was incorrect.

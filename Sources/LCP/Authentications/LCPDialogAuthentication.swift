@@ -6,7 +6,9 @@
 
 import Foundation
 import ReadiumShared
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 /// An `LCPAuthenticating` implementation presenting a dialog to the user.
 ///

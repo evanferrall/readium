@@ -8,7 +8,9 @@ import Foundation
 import ReadiumGCDWebServer
 import ReadiumInternal
 import ReadiumShared
+#if os(iOS) || os(tvOS)
 import UIKit
+#endif
 
 public enum GCDHTTPServerError: Error {
     case failedToStartServer(cause: Error)
