@@ -44,8 +44,7 @@ let package = Package(
             ],
             path: "Sources/Shared",
             linkerSettings: [
-                .linkedFramework("CoreServices"),
-                .linkedFramework("UIKit"),
+                .linkedFramework("CoreServices")
             ]
         ),
         .testTarget(
