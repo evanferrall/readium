@@ -5,7 +5,22 @@
 //
 
 import Foundation
+#if os(iOS) || os(tvOS)
 import UIKit
+#elseif os(macOS)
+import AppKit
+#endif
+
+#if os(iOS) || os(tvOS)
+public typealias PlatformImage = UIImage
+#elseif os(macOS)
+public typealias PlatformImage = NSImage
+#else
+// Placeholder for other platforms if needed, or raise an error
+#warning("PlatformImage not defined for this platform")
+// Or potentially: #error("Unsupported platform for CoverService")
+public typealias PlatformImage = NSObject // Temporary dummy type
+#endif
 
 public typealias CoverServiceFactory = (PublicationServiceContext) -> CoverService?
 
@@ -29,20 +44,20 @@ public protocol CoverService: PublicationService {
     ///
     /// If the cover is not a bitmap format (e.g. SVG), it will be scaled down to fit the screen
     /// using `UIScreen.main.bounds.size`.
-    func cover() async -> ReadResult<UIImage?>
+    func cover() async -> ReadResult<PlatformImage?>
 
     /// Returns the publication cover as a bitmap, scaled down to fit the given `maxSize`.
     ///
     /// If the cover is not in a bitmap format (e.g. SVG), it is exported as a bitmap filling
     /// `maxSize`. The cover might be cached in memory for next calls.
-    func coverFitting(maxSize: CGSize) async -> ReadResult<UIImage?>
+    func coverFitting(maxSize: CGSize) async -> ReadResult<PlatformImage?>
 }
 
 public extension CoverService {
     @available(*, unavailable, message: "Use the async variant")
-    var cover: UIImage? { fatalError() }
+    var cover: PlatformImage? { fatalError() }
 
-    func coverFitting(maxSize: CGSize) async -> ReadResult<UIImage?> {
+    func coverFitting(maxSize: CGSize) async -> ReadResult<PlatformImage?> {
         await cover().map { $0?.scaleToFit(maxSize: maxSize) }
     }
 }
@@ -51,7 +66,7 @@ public extension CoverService {
 
 public extension Publication {
     /// Returns the publication cover as a bitmap at its maximum size.
-    func cover() async -> ReadResult<UIImage?> {
+    func cover() async -> ReadResult<PlatformImage?> {
         if let service = findService(CoverService.self) {
             return await service.cover()
         } else {
@@ -60,7 +75,7 @@ public extension Publication {
     }
 
     /// Returns the publication cover as a bitmap, scaled down to fit the given `maxSize`.
-    func coverFitting(maxSize: CGSize) async -> ReadResult<UIImage?> {
+    func coverFitting(maxSize: CGSize) async -> ReadResult<PlatformImage?> {
         if let service = findService(CoverService.self) {
             return await service.coverFitting(maxSize: maxSize)
         } else {
@@ -70,11 +85,11 @@ public extension Publication {
     }
 
     /// Extracts the first valid cover from the manifest links with `cover` relation.
-    private func coverFromManifest() async -> ReadResult<UIImage?> {
+    private func coverFromManifest() async -> ReadResult<PlatformImage?> {
         for link in linksWithRel(.cover) {
             if let resource = get(link) {
                 return await resource.read()
-                    .map { UIImage(data: $0) }
+                    .map { PlatformImage(data: $0) }
             }
         }
         return .success(nil)
